@@ -1,6 +1,19 @@
 const express    = require('express')
 const app        = express()
 const bodyParser = require('body-parser')
+const mysql = require('mysql')
+const comicdb = mysql.createConnection({
+    host: 'us-cdbr-iron-east-01.cleardb.net',
+    user: 'bb72568e1ffe6c',
+    password: '9c7cce5f',
+    database: 'heroku_5a61d935653267e'
+})
+
+comicdb.connect()
+
+comicdb.query('select * from authors', (error, results, fields) => {
+    console.log(results)
+})
 
 global.reqlib = require('app-root-path').require
 global.reqroute = path => {
