@@ -7,7 +7,14 @@ app.use(bodyParser.json())
 
 const port = process.env.PORT || 3000
 
-app.get('/api/v1/',function(req,res){
+// CORSを許可する
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*")
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization")
+    next()
+})
+
+app.get('/api/v1/',(req,res) => {
     res.json({
         message:"Hello,world"
     })
