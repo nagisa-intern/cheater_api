@@ -2,6 +2,11 @@ const express    = require('express')
 const app        = express()
 const bodyParser = require('body-parser')
 
+global.reqlib = require('app-root-path').require
+global.reqroute = path => {
+    return reqlib(path)(express.Router())
+}
+
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
@@ -14,11 +19,7 @@ app.use((req, res, next) => {
     next()
 })
 
-app.get('/api/v1/',(req,res) => {
-    res.json({
-        message:"Hello,world"
-    })
-})
+app.use('/', reqroute('routes/index'))
 
 app.listen(port)
 console.log('listen on port ' + port)
