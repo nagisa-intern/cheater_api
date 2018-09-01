@@ -1,8 +1,6 @@
 const pages = reqlib('database/pages')
 const { Page, Pages } = reqlib('models/_page')
 
-console.log(reqlib('models/_page'))
-
 module.exports = {
     getListByRanking: async number => {
         const data = await pages.getListByRanking(number)
