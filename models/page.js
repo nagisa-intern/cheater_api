@@ -1,15 +1,15 @@
-const comicdb = reqlib('database/')
+const pages = reqlib('database/pages')
+const { Page, Pages } = reqlib('models/_page')
 
-class Page {
-    constructor (data) {
-        this.data = data
-    }
-}
-
+console.log(reqlib('models/_page'))
 
 module.exports = {
-    getListByRanking: number => {
+    getListByRanking: async number => {
+        const data = await pages.getListByRanking(number)
+        return new Pages(data)
     },
-    getById: id => {
+    getById: async id => {
+        const data = await pages.getById(id)
+        return new Page(data)
     }
 }

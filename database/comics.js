@@ -1,20 +1,23 @@
-const comicdb = require('./index')
+const comicdb = require('./utils')
 
 module.exports = {
     getById: async id => {
-        // WARN: sql injection
-        console.log(334)
-        return new Promise((resolve, reject) => {
-            comicdb.query(
-                `select * from comics where ?`,
-                { id },
-                (error, results, fields) => {
-                    resolve(results[0])
-                    if (error) {
-                        reject(error)
-                    }
-                }
-            )    
-        })
+        const list = await comicdb(
+            `select * from comics where ?`,
+            { id }
+        )
+        return list[0]
+    },
+    firsts: async number => {
+        return comicdb(
+            `select * from comics where id <= ?`,
+            number
+        )
+    },
+    getListByManyIds: async comicIds => {
+        return comicdb(
+            `select * from comics where id in (${comicIds.join(',')})`,
+            undefined
+        )
     }
 }

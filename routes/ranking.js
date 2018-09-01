@@ -1,16 +1,14 @@
+const Page = reqlib('models/page')
+
 module.exports = router => {
-    router.get('/ranking', (req, res) => {
-        // TODO: 更新
-        // reqとつなぐ
-        const number = 5
-        let pages = Page.getListByRanking(number)
-        // Pages objectがかえる
-        pages = pages
-            .injectEpisodeForEach()
-            .injectComicForEach()
-        // pages.each.comicでComics objectがかえる
-        // comicsはそれぞれ入る
-        pages = pages.each.comic.injectAuthorsForEach()
+    router.get('/ranking', async (req, res) => {
+        const number = Number(req.query.number) || 5
+        const pages = await Page.getListByRanking(number)
+        // -> : Pages
+        await pages.injectEpisodeForEach()
+        await pages.injectComicForEach()
+        // pages.each.comic : Comics
+        await pages.each.comic.injectAuthorsForEach()
         res.json(pages.serialize())
     })
     return router

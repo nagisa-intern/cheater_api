@@ -1,13 +1,13 @@
+const Page = reqlib('models/page')
+
 module.exports = router => {
-    router.post('/pages/:id', (req, res) => {
-        // TODO: 更新
-        // reqとつなぐ
-        const page_id = 1
-        const milisec = 1000
-        let page = Page.getById(page_id)
-        // Page objectがかえる
-        page = page.addTime(milisec)
-        page.save()
+    router.post('/pages/:id', async (req, res) => {
+        const page_id = Number(req.params.id)
+        const milisec = Number(req.body.time)
+        const page = await Page.getById(page_id)
+        // -> : Page
+        page.addTime(milisec)
+        await page.saveTime()
         res.json({})
     })
     return router

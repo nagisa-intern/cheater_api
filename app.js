@@ -1,17 +1,28 @@
 global.reqlib = require('app-root-path').require
 global.reqroute = path => {
-    return reqlib(path)(express.Router())
+    const router = express.Router()
+    router._get = router.get
+    router.get = (path, asyncFunc) => {
+        router._get(path, async (req, res) => {
+            console.log('start GET', path)
+            await asyncFunc(req, res)
+            console.log('end GET', path)
+        })
+    }
+    router._post = router.post
+    router.post = (path, asyncFunc) => {
+        router._post(path, async (req, res) => {
+            console.log('start POST', path)
+            await asyncFunc(req, res)
+            console.log('end POST', path)
+        })
+    }
+    return reqlib(path)(router)
 }
 
 const express    = require('express')
 const app        = express()
 const bodyParser = require('body-parser')
-
-const comics = reqlib('database/comics')
-
-comics.getById(1).then(res => {
-    console.log(res)
-})
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -26,6 +37,11 @@ app.use((req, res, next) => {
 })
 
 app.use('/', reqroute('routes/index'))
+app.use('/', reqroute('routes/pages'))
+app.use('/', reqroute('routes/comics'))
+app.use('/', reqroute('routes/comics_list'))
+app.use('/', reqroute('routes/ranking'))
+app.use('/', reqroute('routes/episodes'))
 
 app.listen(port)
 console.log('listen on port ' + port)
