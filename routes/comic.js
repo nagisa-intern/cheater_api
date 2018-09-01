@@ -7,6 +7,7 @@ module.exports = router => {
         comic = comic
             .injectAuthors()
             .injectEpisodes()
+        // comic.episodesで、comic
         comic = comic.episodes.injectPagesForEach()
     })
     return router

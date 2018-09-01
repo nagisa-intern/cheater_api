@@ -7,10 +7,10 @@ const express    = require('express')
 const app        = express()
 const bodyParser = require('body-parser')
 
-const comicdb = reqlib('database/')
+const comics = reqlib('database/comics')
 
-comicdb.query('select * from authors', (error, results, fields) => {
-    console.log(results)
+comics.getById(1).then(res => {
+    console.log(res)
 })
 
 app.use(bodyParser.urlencoded({ extended: true }))
