@@ -5,6 +5,7 @@ module.exports = router => {
         const page_id = 1
         const milisec = 1000
         let page = Page.getById(page_id)
+        // Page objectがかえる
         page = page.addTime(milisec)
         page.save()
         res.json({})
