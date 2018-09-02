@@ -6,7 +6,8 @@ global.reqroute = path => {
         router._get(path, async (req, res) => {
             console.log('start GET', path)
             try {
-                await asyncFunc(req, res)                
+                await asyncFunc(req, res)
+                console.log('aaaaa')               
             } catch (error) {
                 const prof = {
                     p: req.params,
@@ -24,7 +25,7 @@ global.reqroute = path => {
         router._post(path, async (req, res) => {
             console.log('start POST', path)
             try {
-                await asyncFunc(req, res)                
+                await asyncFunc(req, res)            
             } catch (error) {
                 const prof = {
                     p: req.params,
