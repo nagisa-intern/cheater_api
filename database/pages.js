@@ -41,7 +41,7 @@ module.exports = {
     },
     getListByEpisodeAndComicId: async (episode, comic_id) => {
         return comicdb(
-            `select * from page where episode = ? and comic = ?`,
+            `select * from page where episode = ? and comic = ? order by page_number asc`,
             [episode, comic_id]
         )
     }
