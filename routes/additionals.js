@@ -4,7 +4,7 @@ const Page = reqlib('models/page')
 module.exports = router => {
     router.get('/n_ranking', async (req, res) => {
         const r = await axios.get('http://localhost:3001/get')
-        const array = r.data
+        const array = r.data.rank
 
         const pages = await Page.getListByIds(array)
         // -> : Pages
