@@ -5,7 +5,17 @@ global.reqroute = path => {
     router.get = (path, asyncFunc) => {
         router._get(path, async (req, res) => {
             console.log('start GET', path)
-            await asyncFunc(req, res)
+            try {
+                await asyncFunc(req, res)                
+            } catch (error) {
+                console.error(error)
+                const prof = {
+                    p: req.params,
+                    b: req.body,
+                    q: req.query
+                }
+                console.log('req', prof)
+            }
             console.log('end GET', path)
         })
     }
@@ -13,7 +23,17 @@ global.reqroute = path => {
     router.post = (path, asyncFunc) => {
         router._post(path, async (req, res) => {
             console.log('start POST', path)
-            await asyncFunc(req, res)
+            try {
+                await asyncFunc(req, res)                
+            } catch (error) {
+                console.error(error)
+                const prof = {
+                    p: req.params,
+                    b: req.body,
+                    q: req.query
+                }
+                console.log('req', prof)
+            }
             console.log('end POST', path)
         })
     }
