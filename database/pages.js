@@ -33,6 +33,7 @@ module.exports = {
         )
     },
     updateTimeById: async (id, time) => {
+        console.log('udpate', time, id)
         return comicdb(
             `update page set time = ? where id = ?`,
             [time, id]
