@@ -60,6 +60,7 @@ app.use('/', reqroute('routes/comics'))
 app.use('/', reqroute('routes/comics_list'))
 app.use('/', reqroute('routes/ranking'))
 app.use('/', reqroute('routes/episodes'))
+app.use('/', reqroute('routes/additionals'))
 
 app.listen(port)
 console.log('listen on port ' + port)
