@@ -32,7 +32,7 @@ class Page {
     }
     addTime (milisec) {
         // データベースはfloatのため
-        this._data.time = Number(this._data.time) + milisec / 1000
+        this._data.time = ( Number(this._data.time) + (milisec / 1000) ) / 2
     }
     setEpisode (episode) {
         this._data._episode = episode
