@@ -2,7 +2,7 @@ const axios = require('axios')
 const Page = reqlib('models/page')
 
 module.exports = router => {
-    router.get('/ranking', async (req, res) => {
+    router.get('/n_ranking', async (req, res) => {
         const r = await axios.get('http://localhost:3001/get')
         console.log(r.data)
         const array = r.data.rank

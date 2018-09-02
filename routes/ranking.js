@@ -1,7 +1,7 @@
 const Page = reqlib('models/page')
 
 module.exports = router => {
-    router.get('/n_ranking', async (req, res) => {
+    router.get('/ranking', async (req, res) => {
         const number = Number(req.query.number) || 5
         const pages = await Page.getListByRanking(number)
         // -> : Pages
