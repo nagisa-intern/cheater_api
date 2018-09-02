@@ -8,13 +8,13 @@ global.reqroute = path => {
             try {
                 await asyncFunc(req, res)                
             } catch (error) {
-                console.error(error)
                 const prof = {
                     p: req.params,
                     b: req.body,
                     q: req.query
                 }
                 console.log('req', prof)
+                console.error(error)
             }
             console.log('end GET', path)
         })
@@ -26,13 +26,13 @@ global.reqroute = path => {
             try {
                 await asyncFunc(req, res)                
             } catch (error) {
-                console.error(error)
                 const prof = {
                     p: req.params,
                     b: req.body,
                     q: req.query
                 }
                 console.log('req', prof)
+                console.error(error)
             }
             console.log('end POST', path)
         })
